@@ -100,41 +100,4 @@ class MainFragment : Fragment() {
         notificationManager.notify(notificationId, notification)
     }
 
-    private fun launchNotification() {
-        val context = context!!
-        val intent = Intent(context, MainActivity::class.java)
-        val pendingIntent =
-            PendingIntent.getActivity(
-                context,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT)
-
-        val builder =
-            NotificationCompat.Builder(context!!, "channel01")
-                .setSmallIcon(R.drawable.ic_android_black_24dp)
-                .setContentTitle("My notification")
-                .setContentText("Hello World")
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                .setVibrate(longArrayOf(300, 600, 300, 600))
-                .setLights(Color.GREEN, 1000, 1000)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-
-        val channel = NotificationChannel(
-            "channel01",
-            "MyChannel",
-            NotificationManager.IMPORTANCE_HIGH
-        )
-
-        val notificationId = 1
-        val notification = builder.build()
-
-        val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        notificationManager.createNotificationChannel(channel)
-        notificationManager.notify(notificationId, notification)
-    }
-
 }
