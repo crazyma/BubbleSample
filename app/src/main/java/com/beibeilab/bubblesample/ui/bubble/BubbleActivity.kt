@@ -5,8 +5,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.beibeilab.bubblesample.R
 import com.beibeilab.bubblesample.ui.bubble.apilist.ApiListFragment
+import com.beibeilab.bubblesample.ui.bubble.apiop.ApiOperateFragment
 
-class BubbleActivity : AppCompatActivity() {
+class BubbleActivity : AppCompatActivity(), ApiListFragment.Interaction {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,4 +25,14 @@ class BubbleActivity : AppCompatActivity() {
         Log.d("badu", "BubbleActivity onDestroy")
     }
 
+    override fun onApiEndpointClicked() {
+        jumpToApiOperatePage()
+    }
+
+    private fun jumpToApiOperatePage(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, ApiOperateFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
+    }
 }
